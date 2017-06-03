@@ -1,0 +1,5 @@
+{
+  "downloadDir": "/path/to/downloads",
+  "modelsDir": "/path/to/models",
+  "trashDir": "/path/to/trash"
+}

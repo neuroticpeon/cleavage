@@ -1,0 +1,6 @@
+{
+  "models": [
+    {"name": "jane doe", "aliases": ["alias1", "alias2"]},
+    {"name": "john doe"}
+  ]
+}
