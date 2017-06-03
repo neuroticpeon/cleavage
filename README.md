@@ -18,6 +18,6 @@ This file contains a list of models and aliases that are used to determine which
 
 ## Running the organizer
 ```
-python organizer.py
+python organize.py
 ```
 The script will output which files it intends to move as well as the destination directory. It will ask for confirmation before performing the move operation. The same applies for the cleanup step. The actions are printed to the screen and confirmation is obtained before any files are moved.
