@@ -1,6 +1,7 @@
 # !/usr/bin/python3
 import json
 import os
+import re
 import shutil
 import sys
 
@@ -22,7 +23,7 @@ with open("config/models.json") as modelConfig:
             for alias in model["aliases"]:
                 aliases[alias] = name
 
-formats = ["mp4", "mov", "wmv", "m4v"]
+formats = ["avi", "m4v", "mov", "mp4",  "wmv"]
 
 # Determines if a file is a video
 def isVideo(filename):
@@ -40,6 +41,11 @@ def confirm(message):
         return True
     return False
 
+# Creates a regex pattern from a name
+def createPattern(name):
+    pattern = name.replace(" ", ".")
+    return re.compile(pattern, re.IGNORECASE)
+
 # Move files to subdirectory corresponding to model name
 toMove = {}
 for (root, dirs, files) in os.walk(downloadDir):
@@ -48,12 +54,12 @@ for (root, dirs, files) in os.walk(downloadDir):
             # is a recognized name in the filename?
             model = ""
             for name in names:
-                expected = name.replace(" ", ".")
-                if (expected in filename):
+                pattern = createPattern(name)
+                if (pattern.search(filename)):
                     model = name
             for name in aliases:
-                expected = name.replace(" ", ".")
-                if (expected in filename):
+                pattern = createPattern(name)
+                if (pattern.search(filename)):
                     model = aliases[name]
 
             # determine destination directory
