@@ -74,7 +74,9 @@ if (len(toMove) != 0 and confirm("Move files to destination [y/N]? ")):
     for src in toMove:
         if not os.path.exists(toMove[src]):
             os.makedirs(toMove[src])
-        shutil.move(src, toMove[src])
+        dest = os.path.join(toMove[src], os.path.basename(src))
+        if not os.path.exists(dest):
+            shutil.move(src, toMove[src])
 
 # Clean up empty directories by moving to trash directory
 toRemove = []
@@ -90,4 +92,13 @@ for (root, dirs, files) in os.walk(downloadDir):
 
 if (len(toRemove) != 0 and confirm("Move files to trash [y/N]? ")):
     for src in toRemove:
-        shutil.move(src, trashDir)
+        dest = os.path.join(trashDir, os.path.basename(src))
+        if not os.path.exists(dest):
+            shutil.move(src, dest)
+        else:
+            i = 2
+            renamed = dest + "(1)"
+            while os.path.exists(renamed):
+                renamed = dest + "(" + str(i) + ")"
+                i += 1
+            shutil.move(src, renamed)
