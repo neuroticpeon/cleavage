@@ -23,11 +23,11 @@ with open("config/models.json") as modelConfig:
             for alias in model["aliases"]:
                 aliases[alias] = name
 
-formats = ["avi", "m4v", "mov", "mp4",  "wmv"]
+formats = ["avi", "m4v", "mov", "mp4", "mpg", "wmv"]
 
 # Determines if a file is a video
 def isVideo(filename):
-    if ("-sample." in filename):
+    if re.search("-sample\.", filename, re.IGNORECASE):
         return False
     for fmt in formats:
         if (filename.endswith(fmt)):
