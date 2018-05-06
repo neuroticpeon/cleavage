@@ -67,7 +67,7 @@ def main():
                 # determine destination directory
                 src = os.path.join(root, filename)
                 if (len(model) != 0):
-                    print (filename + " -> " + model)
+                    print ("\"" + src + "\"")
                     toMove[src] = os.path.join(modelsDir, model)
                 #else:
                 #    print ("Unknown model: \"" + path + "\"")
